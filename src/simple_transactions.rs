@@ -1,15 +1,15 @@
 use std::time::Duration;
 
 use ethers::{
-    prelude::{Address, LocalWallet, Middleware, Provider, Signer, TransactionRequest, U256},
+    prelude::{Address, LocalWallet, Middleware, Provider, Signer},
     utils::Ganache,
 
 };
-use eyre::{Result};
+
 use hex::ToHex;
 
 #[tokio::main]
-async fn main() -> Result<()>{
+async fn main() -> eyre::Result<()>{
  let mnemonic = "gas monster ski craft below illegal discover limit dog bundle bus artifact";
  let ganache = Ganache::new().mnemonic(mnemonic).spawn();
  println!("HTTP Endpoint: {}", ganache.endpoint());
@@ -31,6 +31,6 @@ async fn main() -> Result<()>{
  let other_address = "0xaf206dCE72A0ef76643dfeDa34DB764E2126E646".parse::<Address>()?;
  let other_balance = provider.get_balance(other_address, None).await?;
  println!("Balance for address{}: {}", other_address_hex, first_balance);
- Ok(());
+ Ok(())
 }
 
